@@ -1,5 +1,6 @@
 import React from 'react';
 import {Text, View, Image, TextInput, StyleSheet} from 'react-native';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 export default class Login extends React.Component{
 
@@ -47,35 +48,31 @@ export default class Login extends React.Component{
                     style={{paddingHorizontal:10}}/>  
                 </View>
 
-                <View style={{
-                    marginHorizontal:55,
-                    alignItems:"center",
-                    justifyContent:"center",
-                    marginTop:30,
-                    backgroundColor:"#00716F",
-                    paddingVertical:8,
-                    borderRadius:23
-                }}>
-                    
-                    <Text 
-                    onPress={()=>navigate('Home')}
-                    
-                    style={{
-                        fontFamily:"MontBold",
-                        color:"white"
-                    }}>Log In</Text>
-                </View>
+                <TouchableOpacity onPress={()=>navigate('Home')}>
+                    <View style={{
+                        marginHorizontal:55,
+                        alignItems:"center",
+                        justifyContent:"center",
+                        marginTop:30,
+                        backgroundColor:"#00716F",
+                        paddingVertical:8,
+                        borderRadius:23
+                    }}>
+                        <Text style={{
+                            fontFamily:"MontBold",
+                            color:"white"
+                        }}>Log In</Text>
+                    </View>
+                </TouchableOpacity>
 
-                <Text 
-                
-                onPress={()=>navigate('Register')}
-                
-                style={{
-                    fontFamily:"MontBold",
-                    alignSelf:"center",
-                    color:"#00716F",
-                    paddingVertical:30
-                }}>Register</Text>
+                <TouchableOpacity onPress={()=>navigate('Register')}>
+                    <Text style={{
+                        fontFamily:"MontBold",
+                        alignSelf:"center",
+                        color:"#00716F",
+                        paddingVertical:30
+                    }}>Register</Text>
+                </TouchableOpacity>
             </View>
         )
     }

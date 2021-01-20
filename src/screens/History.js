@@ -1,24 +1,14 @@
 import React from 'react';
 import {View, Text, ImageBackground, StyleSheet, Platform, FlatList, Dimensions } from 'react-native';
+import { COLUMNS } from '../components/columns'
 
 const headData = [{n:'Tanggal'},{n:'Acuan Masuk'},{n:'Acuan Keluar'},{n:'Absen Masuk'},{n:'Absen Keluar'}]
 
 const dataList = [
-    { n: '03/01', key: '1' },
-    { n: '07.00', key: '2' },
-    { n: '14.00', key: '3' },
-    { n: '07.05', key: '4' },
-    { n: '14.00', key: '5' },
-    { n: '03/01', key: '1' },
-    { n: '07.00', key: '2' },
-    { n: '14.00', key: '3' },
-    { n: '07.05', key: '4' },
-    { n: '14.00', key: '5' },
-    { n: '03/01', key: '1' },
-    { n: '07.00', key: '2' },
-    { n: '14.00', key: '3' },
-    { n: '07.05', key: '4' },
-    { n: '14.00', key: '5' }]
+    { "id":1, "tanggal":"01/01", "acu_msk":"07.00", "acu_klr":"14.00", "abs_msk":"07.05", "abs_klr":"14.05"},
+    { "id":2, "tanggal":"02/01", "acu_msk":"07.00", "acu_klr":"14.00", "abs_msk":"07.05", "abs_klr":"14.05"},
+    { "id":3, "tanggal":"03/01", "acu_msk":"07.00", "acu_klr":"14.00", "abs_msk":"07.05", "abs_klr":"14.05"},
+]
 
 const numColumns = 5
 const WIDTH = Dimensions.get('window').width
@@ -45,22 +35,22 @@ export default class Home extends React.Component {
                     }}>
                         Riwayat Absen (3 terakhir)
                     </Text>
-                </View>
 
-                <View style={styles.container}>
-                    <FlatList style={{backgroundColor:'#20FA7B'}}
-                        data={headData}
-                        renderItem={this._renderItem}
-                        keyExtractor={(item, index) => index.toString()}
-                        numColumns={numColumns}
-                    />
-                    
-                    <FlatList style={{backgroundColor:'white'}}
-                        data={dataList}
-                        renderItem={this._renderItem}
-                        keyExtractor={(item, index) => index.toString()}
-                        numColumns={numColumns}
-                    />
+                    <View style={styles.container}>
+                        <FlatList style={{backgroundColor:'#20FA7B'}}
+                            data={headData}
+                            renderItem={this._renderItem}
+                            keyExtractor={(item, index) => index.toString()}
+                            numColumns={numColumns}
+                        />
+                        
+                        <FlatList style={{backgroundColor:'white'}}
+                            data={dataList}
+                            renderItem={this._renderItem}
+                            keyExtractor={(item, index) => index.toString()}
+                            numColumns={numColumns}
+                        />
+                    </View>
                 </View>
 
             </ImageBackground>
@@ -96,5 +86,5 @@ const styles = StyleSheet.create(
         paddingVertical:8,
         borderRadius:23
       }
-  
-    });
+    }
+);

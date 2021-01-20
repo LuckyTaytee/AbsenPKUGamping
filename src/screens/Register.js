@@ -1,5 +1,6 @@
 import React from 'react';
 import {Text, View, Image, TextInput, StyleSheet} from 'react-native';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 export default class Register extends React.Component{
 
@@ -69,19 +70,23 @@ export default class Register extends React.Component{
                     style={{paddingHorizontal:10}}/>  
                 </View>
 
-                <View style={{
-                    marginHorizontal:55,
-                    alignItems:"center",
-                    justifyContent:"center",
-                    marginTop:30,
-                    backgroundColor:"#00716F",
-                    paddingVertical:8,
-                    borderRadius:23
-                }}>
-                    <Text style={{
-                        color:"white"
-                    }}>Register</Text>
-                </View>
+                <TouchableOpacity>
+                    <View style={{
+                        marginHorizontal:55,
+                        alignItems:"center",
+                        justifyContent:"center",
+                        marginTop:30,
+                        backgroundColor:"#00716F",
+                        paddingVertical:8,
+                        borderRadius:23
+                    }}>
+                        <Text style={{
+                            fontFamily:"MontBold",
+                            color:"white"
+                        }}>Register</Text>
+                    </View>
+                </TouchableOpacity>
+
             </View>
         )
     }
