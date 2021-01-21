@@ -22,15 +22,4 @@ const AppNavigator = createStackNavigator({
 }
 );
 
-const AppTabNavigator = createBottomTabNavigator(
-    {
-        Home: {
-            screen: Home,
-            navigationOptions: {
-                 tabBarIcon: ({tintColor}) => <Ionicons name='ios-home' size={24} color={tintColor} />
-            }
-        }
-    }
-  )
-
 export default createAppContainer(AppNavigator);
