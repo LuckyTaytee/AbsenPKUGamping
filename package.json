@@ -21,6 +21,7 @@
     "react": "16.13.1",
     "react-dom": "^17.0.1",
     "react-native": "0.63.4",
+    "react-native-device-info": "^8.0.1",
     "react-native-gesture-handler": "^1.9.0",
     "react-native-global-props": "^1.1.5",
     "react-native-hide-show-password-input": "^1.2.0",

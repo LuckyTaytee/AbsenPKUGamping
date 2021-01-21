@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {View, Text, ImageBackground, StyleSheet, Platform, FlatList, Dimensions } from 'react-native';
 import { Table, Row, Rows } from 'react-native-table-component'
-import { COLUMNS } from '../components/columns'
 
 export default class History extends React.Component {
     constructor(props) {

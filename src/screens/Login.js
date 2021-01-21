@@ -8,56 +8,31 @@ export default class Login extends React.Component{
         const {navigate} = this.props.navigation
         return(
             <View style={{backgroundColor:'#FFF', height:'100%'}}>
-                <Image 
-                    style = {{width:125, height:125, alignSelf:'center', marginTop:50}}
-                    source = {require('../images/logo.jpg')}
-                />
+                <Image style = {{width:125, height:125, alignSelf:'center', marginTop:50}}
+                    source = {require('../images/logo.jpg')} />
 
-                <Text
-                    style = {{
-                        fontSize:35,
-                        alignSelf:"center",
-                        fontFamily:"MontBold",
-                        color:"#00716F"
-                    }}
-                >E-Absen</Text>
+                <Text style = {[styles.text, { fontSize:35, fontFamily:"MontBold" }]}>
+                    E-Absen</Text>
                 
-                <Text
-                    style = {{
-                        fontSize:20,
-                        alignSelf:"center",
-                        fontFamily:"MontRegular",
-                        color:"#00716F",
-                        marginBottom:40
-                    }}
-                >PKU Gamping</Text>
+                <Text style = {[styles.text, { fontSize:20, fontFamily:"MontRegular", marginBottom:40 }]}>
+                    PKU Gamping</Text>
 
                 <View style = {styles.input}>
-                <TextInput
-                    placeholder="NIK"
-                    placeholderTextColor="#00716F"
-                    keyboardType="number-pad"
-                    style={{paddingHorizontal:10}}/>
+                    <TextInput style={{paddingHorizontal:10}}
+                        placeholder="NIK"
+                        placeholderTextColor="#00716F"
+                        keyboardType="number-pad"/>
                 </View>
 
                 <View style = {styles.input}>
-                <TextInput
-                    secureTextEntry={true}
-                    placeholder="Password"
-                    placeholderTextColor="#00716F"
-                    style={{paddingHorizontal:10}}/>  
+                    <TextInput style={{paddingHorizontal:10}}
+                        secureTextEntry={true}
+                        placeholder="Password"
+                        placeholderTextColor="#00716F"/>  
                 </View>
 
                 <TouchableOpacity onPress={()=>navigate('Home')}>
-                    <View style={{
-                        marginHorizontal:55,
-                        alignItems:"center",
-                        justifyContent:"center",
-                        marginTop:30,
-                        backgroundColor:"#00716F",
-                        paddingVertical:8,
-                        borderRadius:23
-                    }}>
+                    <View style={[styles.button]}>
                         <Text style={{
                             fontFamily:"MontBold",
                             color:"white"
@@ -66,12 +41,8 @@ export default class Login extends React.Component{
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={()=>navigate('Register')}>
-                    <Text style={{
-                        fontFamily:"MontBold",
-                        alignSelf:"center",
-                        color:"#00716F",
-                        paddingVertical:30
-                    }}>Register</Text>
+                    <Text style={[styles.text, { fontFamily:"MontBold", paddingVertical:30 }]}>
+                        Register</Text>
                 </TouchableOpacity>
             </View>
         )
@@ -89,6 +60,18 @@ const styles = StyleSheet.create(
             paddingHorizontal:10,
             borderColor:"#00716F",
             borderRadius:23
-        }
+        },
+
+        button: {
+            marginHorizontal:55,
+            alignItems:"center",
+            justifyContent:"center",
+            marginTop:30,
+            backgroundColor:"#00716F",
+            paddingVertical:8,
+            borderRadius:23
+        },
+
+        text: { alignSelf:"center", color:"#00716F" }
     }
 )

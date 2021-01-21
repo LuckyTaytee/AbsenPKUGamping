@@ -75,50 +75,27 @@ export default class Home extends React.Component {
             source={require('../images/bg-home.jpg')}
             style={{width:"100%", height:'100%'}}>
 
-                <View style={{width:'100%', alignSelf:'center', flex:1 }}>
+                <View style={{width:'100%', alignSelf:'center', flex:1 }}>    
+                    <Text style={[styles.text, { fontFamily:"MontBold", marginTop:35 }]}>
+                        Selamat datang,
+                        <Text>{'\t'}{'\t'}[Nama]</Text>
+                    </Text>
 
-                    <View style={{paddingHorizontal:25, marginTop:50}}>
-                        <Text style={{
-                            fontFamily:"MontBold",
-                            fontSize:20,
-                            color:'white',
-                        }}>
-                            Selamat datang,
-                            <Text>{'\t'}{'\t'}[Nama]</Text>
-                        </Text>
-                    </View>
+                    <Text style={[styles.text, { fontFamily:"MontRegular" }]}>
+                        Waktu saat ini :</Text>
+                    
+                    <Text style={styles.timeText}>
+                        {this.state.currentTime}</Text>
 
-                    <View style={{paddingHorizontal:25, marginTop:25}}>
-                        <Text style={{
-                            fontSize:20,
-                            color:'white',
-                            fontFamily:"MontRegular"
-                        }}>
-                            Waktu saat ini :
-                        </Text>
-                    </View>
-
-                    <View style={styles.clock}>
-                        <View>
-                            <Text style={[styles.timeText, {fontFamily:"MontBold"}]}>{this.state.currentTime}</Text>
-                        </View>
-                    </View>
-
-                    <View style={{paddingHorizontal:25, marginTop:15}}>
-                        <Text style={{
-                            fontSize:16,
-                            color:'white',
-                            fontFamily:"MontRegular"
-                        }}>
-                            Saat ini anda terjadwal,
-                            <Text>{'\t'}{'\t'}[Shift] :</Text>
-                        </Text>
-                    </View>
-
+                    <Text style={[styles.text, { fontFamily:"MontRegular" }]}>
+                        Saat ini Anda terjadwal,
+                        <Text>{'\t'}{'\t'}[Shift] :</Text>
+                    </Text>
+                    
                     <View style={styles.container}>
                         <Table borderStyle={{borderWidth: 2, borderColor: '#6B9080'}}>
-                            <Row data={state.tableHead} style={styles.head} textStyle={styles.text}/>
-                            <Rows data={state.tableData} style={styles.body} textStyle={styles.text}/>
+                            <Row data={state.tableHead} style={styles.tableHead} textStyle={styles.tableText}/>
+                            <Rows data={state.tableData} style={styles.tableBody} textStyle={styles.tableText}/>
                         </Table>
                     </View>
 
@@ -144,12 +121,10 @@ export default class Home extends React.Component {
 
 const styles = StyleSheet.create(
     {
-      clock: {
-        marginTop: (Platform.OS === 'ios') ? 0 : 0,
-        paddingHorizontal:25
-      },
-
       timeText: {
+        marginTop: (Platform.OS === 'ios') ? 0 : 0,
+        paddingHorizontal:25,
+        fontFamily:'MontBold',
         fontSize: 50,
         color: 'white'
       },
@@ -163,9 +138,16 @@ const styles = StyleSheet.create(
         borderRadius:23
       },
 
+      text: {
+        fontSize:18,
+        color:'white',
+        paddingHorizontal:25,
+        marginTop:25
+      },
+
       container: { flex: 1, padding: 25},
-      head: { height: 40, backgroundColor: '#A4C3B2' },
-      text: { margin: 6 },
-      body: { height: 40, backgroundColor: '#fff' }
+      tableHead: { height: 40, backgroundColor: '#A4C3B2' },
+      tableText: { margin: 6 },
+      tableBody: { height: 40, backgroundColor: '#fff' }
   
     });

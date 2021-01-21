@@ -32,57 +32,48 @@ export default class Register extends React.Component{
                 >PKU Gamping</Text>
 
                 <View style = {styles.input}>
-                <TextInput
-                    placeholder="NIK"
-                    placeholderTextColor="#00716F"
-                    keyboardType="number-pad"
-                    style={{paddingHorizontal:10}}/>  
+                    <TextInput
+                        placeholder="NIK"
+                        placeholderTextColor="#00716F"
+                        keyboardType="number-pad"
+                        style={{paddingHorizontal:10}}/>  
                 </View>
 
                 <View style = {styles.input}>
-                <TextInput
-                    placeholder="DeviceID"
-                    placeholderTextColor="#00716F"
-                    style={{paddingHorizontal:10}}/>  
+                    <Text style={{paddingHorizontal:10, paddingVertical:4, color:"#00716F"}}>
+                        deviceId</Text> 
                 </View>
 
                 <View style = {styles.input}>
-                <TextInput
-                    placeholder="Email"
-                    placeholderTextColor="#00716F"
-                    keyboardType="email-address"
-                    style={{paddingHorizontal:10}}/>  
+                    <TextInput
+                        placeholder="Email"
+                        placeholderTextColor="#00716F"
+                        keyboardType="email-address"
+                        style={{paddingHorizontal:10}}/>  
                 </View>
 
                 <View style = {styles.input}>
-                <TextInput
-                    secureTextEntry={true}
-                    placeholder="Password"
-                    placeholderTextColor="#00716F"
-                    style={{paddingHorizontal:10}}/>  
+                    <TextInput
+                        secureTextEntry={true}
+                        placeholder="Password"
+                        placeholderTextColor="#00716F"
+                        style={{paddingHorizontal:10}}/>  
                 </View>
 
                 <View style = {styles.input}>
-                <TextInput
-                    secureTextEntry={true}
-                    placeholder="Confirm Password"
-                    placeholderTextColor="#00716F"
-                    style={{paddingHorizontal:10}}/>  
+                    <TextInput
+                        secureTextEntry={true}
+                        placeholder="Confirm Password"
+                        placeholderTextColor="#00716F"
+                        style={{paddingHorizontal:10}}/>  
                 </View>
 
                 <TouchableOpacity>
-                    <View style={{
-                        marginHorizontal:55,
-                        alignItems:"center",
-                        justifyContent:"center",
-                        marginTop:30,
-                        backgroundColor:"#00716F",
-                        paddingVertical:8,
-                        borderRadius:23
-                    }}>
+                    <View style={[styles.input, { marginTop:20, backgroundColor:"#00716F", paddingVertical:8}]}>
                         <Text style={{
                             fontFamily:"MontBold",
-                            color:"white"
+                            alignSelf:"center",
+                            color:"white",
                         }}>Register</Text>
                     </View>
                 </TouchableOpacity>
@@ -95,14 +86,14 @@ export default class Register extends React.Component{
 const styles = StyleSheet.create(
     {
         input: {
-            flexDirection:"row",
-            alignContent:"center",
             marginHorizontal:55,
             borderWidth:2,
             marginTop:10,
             paddingHorizontal:10,
             borderColor:"#00716F",
             borderRadius:23
-        }
+        },
+
+        text: { alignSelf:"center", color:"#00716F" }
     }
 )
