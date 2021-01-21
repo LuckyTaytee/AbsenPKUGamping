@@ -1,56 +1,43 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {View, Text, ImageBackground, StyleSheet, Platform, FlatList, Dimensions } from 'react-native';
+import { Table, Row, Rows } from 'react-native-table-component'
 import { COLUMNS } from '../components/columns'
 
-const headData = [{n:'Tanggal'},{n:'Acuan Masuk'},{n:'Acuan Keluar'},{n:'Absen Masuk'},{n:'Absen Keluar'}]
-
-const dataList = [
-    { "id":1, "tanggal":"01/01", "acu_msk":"07.00", "acu_klr":"14.00", "abs_msk":"07.05", "abs_klr":"14.05"},
-    { "id":2, "tanggal":"02/01", "acu_msk":"07.00", "acu_klr":"14.00", "abs_msk":"07.05", "abs_klr":"14.05"},
-    { "id":3, "tanggal":"03/01", "acu_msk":"07.00", "acu_klr":"14.00", "abs_msk":"07.05", "abs_klr":"14.05"},
-]
-
-const numColumns = 5
-const WIDTH = Dimensions.get('window').width
-
-export default class Home extends React.Component {
-    _renderItem = ({item, index}) => {
-        return (
-            <View style={styles.item}>
-                <Text>{item.n}</Text>
-            </View>
-        )
+export default class History extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+          tableHead: ['Tanggal', 'Acuan Masuk', 'Acuan Keluar', 'Absen Masuk', 'Absen Keluar'],
+          tableData: [
+            ['01/01', '07.00', '14.00', '07.05', '14.05'],
+            ['01/01', '07.00', '14.00', '07.05', '14.05'],
+            ['01/01', '07.00', '14.00', '07.05', '14.05']
+            ]          
+        }
     }
 
     render(){
+        const state = this.state;
         return(
             <ImageBackground
             source={require('../images/bg-home.jpg')}
             style={{width:"100%", height:'100%'}}>
 
-                <View style={{paddingHorizontal:25, marginTop:25}}>
+                <View style={{paddingHorizontal:25, marginTop:50}}>
                     <Text style={{
+                        fontFamily:'MontBold',
                         fontSize:20,
                         color:'white',
                     }}>
                         Riwayat Absen (3 terakhir)
                     </Text>
+                </View>
 
-                    <View style={styles.container}>
-                        <FlatList style={{backgroundColor:'#20FA7B'}}
-                            data={headData}
-                            renderItem={this._renderItem}
-                            keyExtractor={(item, index) => index.toString()}
-                            numColumns={numColumns}
-                        />
-                        
-                        <FlatList style={{backgroundColor:'white'}}
-                            data={dataList}
-                            renderItem={this._renderItem}
-                            keyExtractor={(item, index) => index.toString()}
-                            numColumns={numColumns}
-                        />
-                    </View>
+                <View style={styles.container}>
+                    <Table borderStyle={{borderWidth: 2, borderColor: '#6B9080'}}>
+                        <Row data={state.tableHead} style={styles.head} textStyle={styles.text}/>
+                        <Rows data={state.tableData} style={styles.body} textStyle={styles.text}/>
+                    </Table>
                 </View>
 
             </ImageBackground>
@@ -60,31 +47,9 @@ export default class Home extends React.Component {
 
 const styles = StyleSheet.create(
     {
-      clock: {
-        marginTop: (Platform.OS === 'ios') ? 0 : 0,
-        alignItems: 'center',
-      },
-
-      container: {
-          paddingHorizontal: 25,
-          paddingTop: 20,
-          marginBottom: 20
-      },
-
-      item: {
-        justifyContent: 'center',
-        height: (WIDTH-200) / numColumns,
-        flex: 1,
-        margin: 1
-      },
-
-      button: {
-        marginHorizontal:55,
-        alignItems:"center",
-        justifyContent:"center",
-        marginTop:20,
-        paddingVertical:8,
-        borderRadius:23
-      }
+      container: { flex: 1, padding: 25},
+      head: { height: 40, backgroundColor: '#A4C3B2' },
+      text: { margin: 6 },
+      body: { height: 40, backgroundColor: '#fff' }
     }
 );

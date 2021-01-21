@@ -2,30 +2,18 @@ import React from 'react';
 //import Icon from '@expo/vector-icons/MaterialCommunityIcons';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import {View, Text, ImageBackground, Button, StyleSheet, Platform, FlatList, Dimensions } from 'react-native';
-
-const headData = [{id:'Jadwal'},{id:'Acuan'},{id:'Jam'},{id:'Keterangan'}]
-
-const dataList = [
-    { id: 'Masuk', key: '1' },
-    { id: '07.00', key: '2' },
-    { id: '07.05', key: '3' },
-    { id: 'Terlambat', key: '4' },
-    { id: 'Keluar', key: '5' },
-    { id: '15.00', key: '6' },
-    { id: '15.05', key: '7' },
-    { id: 'Tepat', key: '8' },]
-
-var isMasuk = "false";
-
-const numColumns = 4
-const WIDTH = Dimensions.get('window').width
+import { Table, Row, Rows } from 'react-native-table-component';
 
 export default class Home extends React.Component {
     constructor() {
         super();
-    
-        this.state = { currentTime: null}
-        this.state = { absenTime: null}
+        this.state = { currentTime: null, absenTime: null, absenType:'Absen Masuk',
+            tableHead: ['Jadwal', 'Acuan', 'Jam', 'Status'],
+            tableData: [
+              ['Masuk', '07.00', '-', 'Terlambat'],
+              ['Keluar', '14.00', '-', 'Tepat']
+            ]  
+        }
     }
     
     componentDidMount() {
@@ -54,16 +42,18 @@ export default class Home extends React.Component {
     }
 
     getAbsenTime = () => {        
-        if (isMasuk === "false") {
-            let newArray = dataList;
-            newArray[2].id = [this.state.absenTime];
-            alert("Anda Masuk pukul " + newArray[2].id);
-            isMasuk = "true"
+        if (this.state.absenType === "Absen Masuk") {
+            let newArray = this.state.tableData;
+            newArray[0][2] = [this.state.absenTime];
+            alert("Anda Masuk pukul " + newArray[0][2]);
+            this.setState({tableData: newArray});
+            this.state.absenType = "Absen Keluar"
         } else {
-            let newArray = dataList;
-            newArray[6].id = [this.state.absenTime];
-            alert("Anda Keluar pukul " + newArray[6].id);
-            isMasuk = "false"
+            let newArray = this.state.tableData;
+            newArray[1][2] = [this.state.absenTime];
+            alert("Anda Keluar pukul " + newArray[1][2]);
+            this.setState({tableData: newArray});
+            this.state.absenType = "Absen Masuk"
         }
     }
     
@@ -77,22 +67,15 @@ export default class Home extends React.Component {
         }, 1000);
     }
 
-    _renderItem = ({item, index}) => {
-        return (
-            <View style={styles.item}>
-                <Text>{item.id}</Text>
-            </View>
-        )
-    }
-
     render(){
+        const state = this.state;
         const {navigate} = this.props.navigation
         return(
             <ImageBackground
             source={require('../images/bg-home.jpg')}
             style={{width:"100%", height:'100%'}}>
 
-                <View style={{backgroundColor:'black', width:'95%', height:'95%', alignSelf:'center', flex:1 }}>
+                <View style={{width:'100%', alignSelf:'center', flex:1 }}>
 
                     <View style={{paddingHorizontal:25, marginTop:50}}>
                         <Text style={{
@@ -132,31 +115,23 @@ export default class Home extends React.Component {
                         </Text>
                     </View>
 
-                    <View style={styles.flatlist}>
-                        <FlatList style={{backgroundColor:'#20FA7B'}}
-                            data={headData}
-                            renderItem={this._renderItem}
-                            keyExtractor={(item, index) => index.toString()}
-                            numColumns={numColumns}
-                        />
-                        
-                        <FlatList style={{backgroundColor:'white'}}
-                            data={dataList}
-                            renderItem={this._renderItem}
-                            numColumns={numColumns}
-                        />
+                    <View style={styles.container}>
+                        <Table borderStyle={{borderWidth: 2, borderColor: '#6B9080'}}>
+                            <Row data={state.tableHead} style={styles.head} textStyle={styles.text}/>
+                            <Rows data={state.tableData} style={styles.body} textStyle={styles.text}/>
+                        </Table>
                     </View>
 
                     <TouchableOpacity onPress={this.getAbsenTime}>
                         <View style={[styles.button, {backgroundColor:'white'}]}>
                                 <Text style={{fontFamily:"MontBold", color:"#00716F"}}>
-                                    Absen Masuk/Keluar</Text>
+                                    {this.state.absenType}</Text>
                         </View>
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={()=>navigate('History')}>
-                        <View style={[styles.button, {backgroundColor:'#06C7C4'}]}>             
-                            <Text style={{fontFamily:"MontBold", color:"#00716F"}}>
+                        <View style={[styles.button, {backgroundColor:'#06C7C4', marginBottom:25}]}>             
+                            <Text id='buttonabsen' style={{fontFamily:"MontBold", color:"#00716F"}}>
                                 Riwayat Absen</Text>
                         </View>
                     </TouchableOpacity>
@@ -171,26 +146,12 @@ const styles = StyleSheet.create(
     {
       clock: {
         marginTop: (Platform.OS === 'ios') ? 0 : 0,
-        alignItems: 'center',
+        paddingHorizontal:25
       },
 
       timeText: {
         fontSize: 50,
         color: 'white'
-      },
-
-      flatlist: {
-          paddingHorizontal: 25,
-          paddingTop: 20,
-          marginBottom: 20
-      },
-
-      item: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: (WIDTH-200) / numColumns,
-        flex: 1,
-        margin: 1
       },
 
       button: {
@@ -200,6 +161,11 @@ const styles = StyleSheet.create(
         marginTop:20,
         paddingVertical:8,
         borderRadius:23
-      }
+      },
+
+      container: { flex: 1, padding: 25},
+      head: { height: 40, backgroundColor: '#A4C3B2' },
+      text: { margin: 6 },
+      body: { height: 40, backgroundColor: '#fff' }
   
     });
